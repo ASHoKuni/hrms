@@ -110,8 +110,14 @@ $enddate = date("Y-m-d", strtotime($date2));
 	 $datetotal= DB::table('salary_payments')->whereBetween('payment_month', [$startdate, $enddate])
 	->where('user_id', $empid)->sum('gross_salary');
 
+	$users = DB::table('users')
+            ->join('salary_payments', 'users.id', '=', 'salary_payments.user_id')
+			->join('payrolls', 'users.id', '=', 'payrolls.user_id')
+			->where('salary_payments.user_id', $empid)
+            ->select('users.*', 'salary_payments.*','payrolls.*')
+            ->get();
 
-    	return view('administrator.hrm.increment.salaryStatementView', compact('salarysheets', 'startdate', 'enddate', 'datetotal', 'empid'));
+    	return view('administrator.hrm.increment.salaryStatementView', compact('salarysheets', 'startdate', 'enddate', 'datetotal', 'empid','users'));
     }
 }
 
@@ -139,8 +145,13 @@ public function salaryStatementPreview(Request $request){
 	 $datetotal= DB::table('salary_payments')->whereBetween('payment_month', [$request->date1, $request->date2])
 	->where('user_id', $empid)->sum('gross_salary');
 
-
-    	return view('administrator.hrm.increment.salaryStatementPreview', compact('salarystats', 'startdate', 'enddate', 'datetotal', 'empid'));
+	$users = DB::table('users')
+            ->join('salary_payments', 'users.id', '=', 'salary_payments.user_id')
+			->join('payrolls', 'users.id', '=', 'payrolls.user_id')
+			->where('salary_payments.user_id', $empid)
+            ->select('users.*', 'salary_payments.*','payrolls.*')
+            ->get();
+    	return view('administrator.hrm.increment.salaryStatementPreview', compact('salarystats', 'startdate', 'enddate', 'datetotal', 'empid','users'));
     }
 }
 
@@ -168,10 +179,16 @@ public function salaryStatementPdf(Request $request){
 	->get();
 	 $datetotal= DB::table('salary_payments')->whereBetween('payment_month', [$request->date1, $request->date2])
 	->where('user_id', $empid)->sum('gross_salary');
-
+    
+	$users = DB::table('users')
+            ->join('salary_payments', 'users.id', '=', 'salary_payments.user_id')
+			->join('payrolls', 'users.id', '=', 'payrolls.user_id')
+			->where('salary_payments.user_id', $empid)
+            ->select('users.*', 'salary_payments.*','payrolls.*')
+            ->get();
 	
 
-$pdf = PDF::loadView('administrator.hrm.increment.salaryStatementPdf', compact('salarystats', 'startdate', 'enddate', 'datetotal', 'empid'));
+$pdf = PDF::loadView('administrator.hrm.increment.salaryStatementPdf', compact('salarystats', 'startdate', 'enddate', 'datetotal', 'empid','users'));
 		$file_name = 'Salary-Statement.pdf';
 		return $pdf->download($file_name);
 

@@ -1,6 +1,7 @@
 <header class="main-header">
     <!-- Logo -->
     <a href="{{ url('/dashboard') }}" class="logo">
+    <h3>Heratly Lab</h3><br/>
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
                         <!-- @if(!empty(auth()->user()->avatar))
@@ -8,14 +9,14 @@
                         @else -->
                         <!-- <img src="{{ asset('/profile_picture/ht.png') }}" class="user-image" alt="User Image"> -->
                         <!-- @endif -->
-                        HT
+                        <h2>HT</h2>
         </span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
                         <!-- @if(!empty(auth()->user()->avatar))
                         <img src="{{ asset('/profile_picture/'.auth()->user()->avatar) }}" class="user-image" alt="User Image">
                         @else -->
-                        <p >Heratly Lab</p>
+                        <h2>Heratly Lab</h2>
                         <!-- <img src="{{ asset('/profile_picture/ht.png') }}" class="user-image" alt="User Image"> -->
                         <!-- @endif</span> -->
     </a>

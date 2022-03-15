@@ -38,7 +38,7 @@
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->
-      <div class="small-box bg-orange">
+      <!-- <div class="small-box bg-orange">
         <div class="inner">
          <h3><i class="fa fa-envelope"></i> {{ count($references) }}</h3>
 
@@ -48,12 +48,12 @@
           
         </div>
         <a href="{{ url('/people/references') }}" class="small-box-footer">{{ __('More info ') }}<i class="fa fa-arrow-circle-right"></i></a>
-      </div>
+      </div> -->
     </div>
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
      
-      <div class="small-box bg-blue">
+      <!-- <div class="small-box bg-blue">
         <div class="inner">
           <h3><i class="fa fa-file"></i> {{ count($clients) }}</h3>
 
@@ -63,7 +63,7 @@
           
         </div>
         <a href="{{ url('/people/clients') }}" class="small-box-footer">{{ __('More info ') }}<i class="fa fa-arrow-circle-right"></i></a>
-      </div>
+      </div> -->
     </div>
     <!-- ./col -->
     <!-- <div class="col-lg-3 col-xs-6">

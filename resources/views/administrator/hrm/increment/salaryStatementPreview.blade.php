@@ -29,23 +29,12 @@
                 </div>
                 <!-- /.Notification Box -->
 
-        <div class="container mt-5 mb-5">
+                <div class="container mt-5 mb-5">
             <div class="row">
                 <div class="col-md-12">
 
                 <h4>
-                <?php $users= \App\User::all()->where('employee_id', $empid);
-                    foreach($users as $user){
-                    $empname=$user->name;
-                    $idno=$user->id_number;
-                    $joindate=$user->joining_date;
-                    $contact=$user->contact_no_one;
-                    $datebirth=$user->date_of_birth;
-                    $designation=$user->designation_id;
-                    $prsaddress=$user->present_address;
-                    $prmaddress=$user->permanent_address;
-                    }
-                    ?>
+                @foreach($users as $payroll)
                     <div class="row">
                         <div class="col-md-10">
                             <div class="row">
@@ -61,7 +50,7 @@
                             <br/>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div> <span class="fw-bolder">Name of Employee :</span> <small class="ms-3">{{$empname}}</small> </div>
+                                    <div> <span class="fw-bolder">Name of Employee :</span> <small class="ms-3">{{$payroll->name}}</small> </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div> <span class="fw-bolder">Number of day in Month :</span> <small class="ms-3">30</small> </div>
@@ -76,12 +65,12 @@
                                 </div>
                             </div>
                             <div class="row">
-                            @foreach($salarystats as $payroll)
+                            
                                 <div class="col-md-6">
                                     <div> <span class="fw-bolder">Month :</span> <small class="ms-3">{{ date("d F Y", strtotime($payroll->payment_month)) }}</small> </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div> <span class="fw-bolder">Date of joining_date :</span> <small class="ms-3">{{$joindate}}</small> </div>
+                                    <div> <span class="fw-bolder">Date of joining_date :</span> <small class="ms-3">{{$payroll->joining_date}}</small> </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -94,10 +83,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                <?php $desig= \App\Designation::find($designation)->designation;?>
+                                <?php $desig= \App\Designation::find($payroll->designation_id)->designation;?>
                                 <div> <span class="fw-bolder">Designation :</span> <small class="ms-3">{{$desig}}</small> </div>           
                                 
-                                    <!-- <div> <span class="fw-bolder">Designation :</span> <small class="ms-3">{{$designation}}</small> </div> -->
+                                    <!-- <div> <span class="fw-bolder">Designation :</span> <small class="ms-3"></small> </div> -->
                                 </div>
                                 <div class="col-md-6">
                                     <div> <span class="fw-bolder">PF UAN Number :</span> <small class="ms-3">*********</small> </div>
@@ -122,13 +111,13 @@
                                     <th scope="row">Basic Salary</th>
                                     <td>{{$payroll->payment_amount}}</td>
                                     <td>Employee Provident Fund</td>
-                                    <td>{{$payroll->provident_fund}}</td>
+                                    <td>{{$payroll->provident_fund_contribution}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">HRA</th>
-                                    <td>0.00</td>
+                                    <td>{{$payroll->house_rent_allowance}}</td>
                                     <td>Employer Provident Fund</td>
-                                    <td>0.00</td>
+                                    <td>{{$payroll->provident_fund_deduction}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Fix Conveyance</th>
@@ -138,9 +127,9 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Medical Allowance</th>
-                                    <td>0.00 </td>
+                                    <td>{{$payroll->medical_allowance}} </td>
                                     <td>Professional Tax</td>
-                                    <td>0.00</td>
+                                    <td>{{$payroll->tax_deduction}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Internet Allowance</th>
@@ -162,7 +151,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Special Allowance</th>
-                                    <td>0.00</td>
+                                    <td>{{$payroll->special_allowance}}</td>
                                     <td></td>
                                     <td></td>
                                 </tr>
